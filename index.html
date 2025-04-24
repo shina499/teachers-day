@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fa">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>نامه‌ای از آینده</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap");
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Vazirmatn", sans-serif;
+        direction: rtl;
+        background: linear-gradient(to bottom, #ffe8ec, #fff8e7);
+        color: #333;
+        overflow-x: hidden;
+      }
+      .section {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+        position: relative;
+      }
+      .scene1 {
+        background: linear-gradient(to bottom right, #f9c5d1, #fddde6);
+      }
+      .scene2 {
+        background: linear-gradient(to right, #fff1eb, #ace0f9);
+      }
+      .chalkboard-text {
+        font-size: clamp(1.2rem, 5vw, 1.5rem);
+        white-space: normal;
+        border-right: 2px solid rgba(0, 0, 0, 0.75);
+        overflow: hidden;
+        width: 0;
+        color: #2e2e2e;
+        line-height: 1.5;
+      }
+      .chalk-animate {
+        animation: chalk 5s steps(60) forwards, blink 0.75s step-end infinite;
+      }
+      @keyframes chalk {
+        to {
+          width: 100%;
+        }
+      }
+      @keyframes blink {
+        50% {
+          border-color: transparent;
+        }
+      }
+      .scene3 {
+        background: #e6f4ea;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1rem;
+        padding: 1.5rem;
+      }
+      @media (max-width: 600px) {
+        .scene3 {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 0.5rem;
+        }
+      }
+      .seed-spot {
+        width: clamp(100px, 30vw, 120px);
+        height: clamp(100px, 30vw, 120px);
+        background: #fff;
+        border-radius: 50%;
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s;
+        overflow: visible;
+      }
+      .seed-spot:hover {
+        transform: scale(1.05);
+      }
+      .seed-icon {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+      }
+      .message {
+        display: none;
+        font-size: clamp(0.8rem, 3vw, 0.9rem);
+        color: #2e2e2e;
+        padding: 0 0.3rem;
+        margin-top: 0.5rem;
+      }
+      .seed-spot.grown .seed-icon {
+        /* Remain visible after click */
+      }
+      .seed-spot.grown .sprout {
+        opacity: 1;
+      }
+      .sprout {
+        width: clamp(40px, 12vw, 50px);
+        height: clamp(40px, 12vw, 50px);
+        background: url("https://cdn-icons-png.flaticon.com/512/427/427735.png") no-repeat center;
+        background-size: contain;
+        position: absolute;
+        bottom: 25%;
+        opacity: 0;
+        transform: scale(0.2);
+        animation: growPlant 1.2s ease-out forwards;
+      }
+      @keyframes growPlant {
+        0% {
+          opacity: 0;
+          transform: scale(0.2) rotate(-20deg);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.1) rotate(5deg);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1) rotate(0);
+        }
+      }
+      .scene4 {
+        background: #fffef0;
+      }
+      .bubble {
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+        padding: 0.8rem 1rem;
+        margin: 0.3rem auto;
+        font-size: clamp(0.9rem, 3.5vw, 1rem);
+        color: #333;
+        width: fit-content;
+        max-width: 90%;
+        animation: floatUp 7s ease-in-out infinite;
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.4s;
+      }
+      @keyframes floatUp {
+        0% { transform: translateY(40px); opacity: 0; }
+        50% { opacity: 1; }
+        100% { transform: translateY(-80px); opacity: 0; }
+      }
+      .scene5 {
+        background: radial-gradient(circle at center, #2a0d4d, #0b1a33, #000);
+        position: relative;
+        overflow: hidden;
+      }
+      .galaxy-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+      }
+      .scene5 h2 {
+        z-index: 2;
+        position: relative;
+        color: #ffffff;
+        font-size: clamp(1.2rem, 5vw, 1.5rem);
+        padding: 0 1rem;
+        text-shadow:  0px 1px 2px rgba(0, 0, 0, 0.350), 0px 3px 2px rgb(0 0 0 / 0.350), 0px 4px 8px rgb(0 0 0 / 0.3) ;
+      }
+      .nav-dots {
+        position: fixed;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 999;
+      }
+      .nav-dots span {
+        width: 10px;
+        height: 10px;
+        background: #888;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      .nav-dots span:hover,
+      .nav-dots span.active {
+        background: #333;
+      }
+      @media (max-width: 600px) {
+        .section {
+          padding: 0.8rem;
+        }
+        .nav-dots {
+          right: 5px;
+          gap: 8px;
+        }
+        .nav-dots span {
+          width: 8px;
+          height: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav-dots">
+      <span onclick="scrollToSection(0)"></span>
+      <span onclick="scrollToSection(1)"></span>
+      <span onclick="scrollToSection(2)"></span>
+      <span onclick="scrollToSection(3)"></span>
+      <span onclick="scrollToSection(4)"></span>
+    </div>
+    <section class="section scene1" id="sec0">
+      <h1 class="chalkboard-text" id="text1">
+        جایی که یاد دادن آغاز شد، زمان ایستاد...
+      </h1>
+    </section>
+    <section class="section scene2" id="sec1">
+      <h2 class="chalkboard-text" id="text2">
+        دانش، نوری بود که از دستانت افتاد روی تخته...
+      </h2>
+    </section>
+    <section class="section scene3" id="sec2">
+      <div class="seed-spot" onclick="growPlant(this, 'تو با هر کلامت امید کاشتی')">
+        <span class="seed-icon">🌱</span>
+        <div class="message"></div>
+      </div>
+      <div class="seed-spot" onclick="growPlant(this, 'درس‌ها رفتن اما اثرشون موند')">
+        <span class="seed-icon">🌱</span>
+        <div class="message"></div>
+      </div>
+      <div class="seed-spot" onclick="growPlant(this, 'هر کلمه‌ات، دونه‌ای بود که جوونه زد')">
+        <span class="seed-icon">🌱</span>
+        <div class="message"></div>
+      </div>
+      <div class="seed-spot" onclick="growPlant(this, 'مثل بارون روی خاک تشنه بودی')">
+        <span class="seed-icon">🌱</span>
+        <div class="message"></div>
+      </div>
+      <div class="seed-spot" onclick="growPlant(this, 'تو فقط درس نمی‌دادی، زندگی می‌دادی')">
+        <span class="seed-icon">🌱</span>
+        <div class="message"></div>
+      </div>
+      <div class="seed-spot" onclick="growPlant(this, 'با نگاهت، دنیامون روشن شد')">
+        <span class="seed-icon">🌱</span>
+        <div class="message"></div>
+      </div>
+    </section>
+    <section class="section scene4" id="sec3"></section>
+    <section class="section scene5" id="sec4">
+      <canvas id="galaxyCanvas" class="galaxy-canvas"></canvas>
+      <h2>تو فقط معلم نبودی... تو جهان کوچکی بودی که ما در آن رشد کردیم.</h2>
+    </section>
+    <script>
+      const sections = document.querySelectorAll(".section");
+      function scrollToSection(i) {
+        sections[i]?.scrollIntoView({ behavior: "smooth" });
+        document
+          .querySelectorAll(".nav-dots span")
+          .forEach((s, idx) => s.classList.toggle("active", idx === i));
+      }
+      const bubbles = [
+        "هیچ‌وقت نگفتی که نمی‌تونم",
+        "تو باور کردی، وقتی خودم شک داشتم",
+        "امید دادی، نه نمره",
+        "با تو ترس از سوال‌ها ریخت",
+        "کلاس تو جای امنی بود برای اشتباه کردن",
+        "یاد دادی اول انسان بودن مهمه، بعد دانشمند بودن",
+        "تو باعث شدی رویا ببافم، نه ترس",
+        "یاد دادی شکست، بخشی از رشد کردنه",
+        "صدات همیشه توی ذهنم می‌پیچه",
+        "لبخندت پناه من بود تو روزای سخت",
+      ];
+      let index = 0;
+      function addBubble() {
+        if (index >= bubbles.length) return;
+        const d = document.createElement("div");
+        d.className = "bubble";
+        d.innerText = bubbles[index++];
+        document.getElementById("sec3").appendChild(d);
+        setTimeout(() => (d.style.opacity = 1), 100);
+        setTimeout(addBubble, 2000);
+      }
+      function drawGalaxy() {
+        const c = document.getElementById("galaxyCanvas"),
+          ctx = c.getContext("2d");
+        let w = (c.width = window.innerWidth),
+          h = (c.height = window.innerHeight),
+          stars = [];
+        for (let i = 0; i < 150; i++)
+          stars.push({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.2, speed: Math.random() * 0.3 + 0.1 });
+        (function animate() {
+          let grad = ctx.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, w / 2);
+          grad.addColorStop(0, "#ffffcc");
+          grad.addColorStop(0.5, "#9bcaff");
+          grad.addColorStop(1, "#0b1a33");
+          ctx.fillStyle = grad;
+          ctx.fillRect(0, 0, w, h);
+          ctx.fillStyle = "#fff";
+          stars.forEach((s) => {
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r, 0, 2 * Math.PI);
+            ctx.fill();
+            s.x += s.speed;
+            if (s.x > w) s.x = 0;
+          });
+          requestAnimationFrame(animate);
+        })();
+      }
+      function triggerChalkAnimation(id) {
+        const e = document.getElementById(id);
+        if (e && !e.classList.contains("chalk-animate")) {
+          e.classList.add("chalk-animate");
+        }
+      }
+      function isInViewport(el) {
+        const r = el.getBoundingClientRect();
+        return r.top < window.innerHeight && r.bottom >= 0;
+      }
+      function growPlant(el, message) {
+        el.classList.add("grown");
+        el.querySelector(".seed-icon").innerText = "🪴";
+        const msg = el.querySelector(".message");
+        msg.innerText = message;
+        msg.style.display = "block";
+      }
+      window.addEventListener("scroll", () => {
+        // Trigger animation for sec0 (text1) immediately on scroll
+        triggerChalkAnimation("text1");
+        // Trigger animation for sec1 (text2) only when sec1 is in viewport
+        const sec1 = document.getElementById("sec1");
+        if (sec1 && isInViewport(sec1)) {
+          triggerChalkAnimation("text2");
+        }
+      });
+      window.addEventListener("load", () => {
+        addBubble();
+        drawGalaxy();
+        scrollToSection(0);
+        // Trigger text1 animation on load
+        triggerChalkAnimation("text1");
+      });
+      window.addEventListener("resize", () => {
+        const c = document.getElementById("galaxyCanvas");
+        c.width = window.innerWidth;
+        c.height = window.innerHeight;
+      });
+    </script>
+  </body>
+</html>
